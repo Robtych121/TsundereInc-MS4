@@ -1,0 +1,18 @@
+html, body {
+    background-image: url('../img/prism.png');
+}
+
+.container {
+    background-color: white;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.pageContainer {
+    padding: 15px;
+}
+
+.HeadingContainer {
+    text-align: center;
+    padding-top: 15px;
+}
