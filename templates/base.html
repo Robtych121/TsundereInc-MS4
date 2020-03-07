@@ -21,14 +21,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Explore</a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
-                  <a class="dropdown-item" href="{% url 'all_tickets' %}">Bugs</a>
-                  <a class="dropdown-item" href="#">Features</a>
+                  <a class="dropdown-item" href="{% url 'all_bugs' %}">Bugs</a>
+                  <a class="dropdown-item" href="{% url 'all_features' %}">Features</a>
                   <a class="dropdown-item" href="#">Forum</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Store</a>
                 </div>
               </li>
             </ul>

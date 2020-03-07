@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page_title %}All Bugs{% endblock %}
+{% block page_heading%}All Bugs{% endblock %}
+
+{% block content %}
+
+{% for ticket in tickets %}
+{{ticket.name}}
+{{ticket.description}}
+{{ticket.date}}
+{{ticket.status}}
+{{ticket.priority}}
+{{ticket.views}}
+{{ticket.upvotes}}
+{% endfor %}
+
+{% endblock %}
