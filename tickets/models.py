@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime 
 
 # Create your models here.
 class Ticket(models.Model):
@@ -10,7 +11,7 @@ class Ticket(models.Model):
     name = models.CharField(max_length=254, default='')
     author = models.CharField(max_length=50, default='')
     description = models.TextField()
-    date = models.DateField()
+    date = models.DateField(default=datetime.now, blank=True)
     STATUS_CHOICES = [
         ('NEW', 'New'),
         ('INPROGRESS', 'In Progress'),

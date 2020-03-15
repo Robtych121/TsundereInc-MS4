@@ -4,7 +4,7 @@
 {% block page_heading%}View Bug - {{bug.name}}{% endblock %}
 
 {% block content %}
-
+<p class="text-center"><a href="{% url 'edit_bug' bug.id %}"><button type="button" class="btn btn-info">Edit Bug</button></a></p>
 
 <div class="card border-primary mb-3">
     <div class="card-header">{{bug.name}} - {{bug.author}}</div>
@@ -29,9 +29,22 @@
         <p class="card-text">{{bug.description}}</p>
     </div>
     <div class="card-footer text-muted">
-        <i class="fas fa-calendar-week"></i> {{bug.date}} - <i class="far fa-eye"></i> <span class="badge badge-primary badge-pill">{{bug.views}}</span> - <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{bug.upvotes}}</span>
+        <i class="fas fa-calendar-week"></i> {{bug.date}} - <i class="far fa-eye"></i> <span class="badge badge-primary badge-pill">{{bug.views}}</span> - <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{bug.upvotes}}</span> <a href="{% url 'ticket_upvote' bug.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Button</span></a>
     </div>
 </div>
 
+<h3 class="HeadingContainer">Comments</h3>
+<p class="text-center"><button type="button" class="btn btn-success">New Comment</button></p>
+
+{% for comment in comments %}
+<div class="card border-primary mb-3">
+    <div class="card-header">{{comment.author}} - {{comment.date}}</div>
+    <div class="card-body">        
+        <p class="card-text">{{comment.content}}</p>
+    </div>
+</div>
+{% empty %}
+<div class="alert alert-dismissible alert-info">There are no comments, Make one!</div>
+{% endfor%}
 
 {% endblock %}

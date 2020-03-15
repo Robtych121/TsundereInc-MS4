@@ -4,7 +4,7 @@
 {% block page_heading%}All Bugs{% endblock %}
 
 {% block content %}
-
+<p class="text-center"><a href="{% url 'new_bug' %}"><button type="button" class="btn btn-success">New Bug</button></a> <button type="button" class="btn btn-primary">Completed Bugs</button></p>
 {% for ticket in tickets %}
 <div class="card border-primary mb-3">
     <div class="card-header">{{ticket.name}} - {{ticket.author}} <span style="float: right;"><a href="{% url 'view_bug' ticket.id %}">View Bug</a></span></div>

@@ -4,3 +4,4 @@ Notes.docx
 *epgz
 env.py
 *.pyc
+.vscode/settings.json
