@@ -11,7 +11,8 @@
 {% if user.is_authenticated %}
 <p class="text-center">
     {% if ticket.status != 'COMPLETED' %}
-        {% if ticket.type == 'BUG' %}<a href="{% url 'edit_bug' ticket.id %}"><button type="button" class="btn btn-info">Edit Ticket</button></a>{%endif%}
+        {% if ticket.type == 'BUG' %}<a href="{% url 'edit_bug' ticket.id %}"><button type="button" class="btn btn-info">Edit Bug</button></a>{%endif%}
+        {% if ticket.type == 'FEATURE' %}<a href="{% url 'edit_feature' ticket.id %}"><button type="button" class="btn btn-info">Edit Feature</button></a>{%endif%}
     {% else %}
     <div class="alert  alert-info">
     Sorry, this bug cannot be edited anymore as it's been completed.
@@ -42,7 +43,21 @@
         <p class="card-text">{{ticket.description}}</p>
     </div>
     <div class="card-footer text-muted">
-        <i class="fas fa-calendar-week"></i> {{ticket.date}} - <i class="far fa-eye"></i> <span class="badge badge-primary badge-pill">{{ticket.views}}</span> - <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{ticket.upvotes}}</span> {% if user.is_authenticated %}<a href="{% url 'ticket_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Button</span></a>{% endif%}
+        <i class="fas fa-calendar-week"></i> {{ticket.date}} - <i class="far fa-eye"></i> 
+        <span class="badge badge-primary badge-pill">{{ticket.views}}</span> - <i class="fas fa-arrow-circle-up"></i> 
+        <span class="badge badge-primary badge-pill">{{ticket.upvotes}}</span> 
+        {% if user.is_authenticated %}
+            {% if ticket.type == 'BUG' %}
+            <a href="{% url 'ticket_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Bug</span></a>
+            {% endif%}
+            {% if ticket.type == 'FEATURE' %}
+                {% if ticket.status != 'COMPLETED' %}
+                <a href="{% url 'feature_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Feature</span></a>
+                {% else %}
+                <span class="upvote-btn btn btn-warning btn-sm disabled" >Upvote Feature</span>
+                {% endif%}
+            {% endif%}
+        {% endif%}
     </div>
 </div>
 

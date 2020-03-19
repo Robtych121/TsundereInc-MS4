@@ -30,6 +30,14 @@ def all_features(request):
     tickets = Ticket.objects.exclude(status='COMPLETED').filter(type='FEATURE')
     return render(request, 'all_features.html', {'tickets': tickets})
 
+def all_completed_features(request):
+    """
+    Renders a page showing all the tickets with type bug and aren't completed
+    """
+    tickets = Ticket.objects.filter(type='FEATURE',status='COMPLETED')
+    username = request.user.username
+    return render(request, 'all_completed_features.html', {'tickets': tickets}, username)
+
 def view_ticket(request, id):
     """
     A view bug page with comments and also increments the views counter
@@ -67,10 +75,41 @@ def create_or_edit_bug(request, pk=None):
             return redirect(view_ticket, ticket.pk)
     else:
         form = TicketForm(instance=ticket)
-    return render(request, 'ticketform.html', {'form': form})
+    return render(request, 'bugform.html', {'form': form})
+
+
+def create_or_edit_feature(request, pk=None):
+    """
+    Create a  view that allows us to create
+    or edit a ticket depending if the ticket ID
+    is null or not
+    """
+    ticket = get_object_or_404(Ticket, pk=pk) if pk else None
+    username = request.user.username
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.type = "FEATURE"
+            ticket.author = username.capitalize()
+            ticket.save()
+            return redirect(view_ticket, ticket.pk)
+    else:
+        form = TicketForm(instance=ticket)
+    return render(request, 'featureform.html', {'form': form})
 
 
 def ticket_upvote(request, pk=None):
+    """
+    Upvote view for tickets
+    """
+    ticket = get_object_or_404(Ticket, pk=pk) if pk else None
+    ticket.upvotes = F('upvotes') + 1
+    ticket.views = F('views') - 1
+    ticket.save()
+    return redirect(view_ticket, ticket.pk)
+
+def feature_upvote(request, pk=None):
     """
     Upvote view for tickets
     """
