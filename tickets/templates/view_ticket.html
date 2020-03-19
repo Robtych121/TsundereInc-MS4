@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
-{% block page_title %}View Bug - {{bug.name}}{% endblock %}
-{% block page_heading%}View Bug - {{bug.name}}{% endblock %}
+    {% block page_title %}
+        {% if ticket.type == 'BUG' %}View Bug - {{ticket.name}}{% else%}View Feature - {{ticket.name}}{%endif%}
+    {% endblock %}
+    {% block page_heading%}
+        {% if ticket.type == 'BUG' %}View Bug - {{ticket.name}}{% else%}View Feature - {{ticket.name}}{%endif%}
+    {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
 <p class="text-center">
-    {% if bug.status != 'COMPLETED' %}
-    <a href="{% url 'edit_bug' bug.id %}"><button type="button" class="btn btn-info">Edit Bug</button></a>
+    {% if ticket.status != 'COMPLETED' %}
+        {% if ticket.type == 'BUG' %}<a href="{% url 'edit_bug' ticket.id %}"><button type="button" class="btn btn-info">Edit Ticket</button></a>{%endif%}
     {% else %}
     <div class="alert  alert-info">
     Sorry, this bug cannot be edited anymore as it's been completed.
@@ -16,35 +20,35 @@
 </p>
 {% endif %}
 <div class="card border-primary mb-3">
-    <div class="card-header">{{bug.name}} - {{bug.author}}</div>
+    <div class="card-header">{{ticket.name}} - {{ticket.author}}</div>
     <div class="card-body">
         
         <div class="progress">
-            {% if bug.status == 'NEW' %}
+            {% if ticket.status == 'NEW' %}
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Status: New</div>
             {% endif %}
-            {% if bug.status == 'INPROGRESS' %}
+            {% if ticket.status == 'INPROGRESS' %}
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Status: In Progress</div>
             {% endif %}
-            {% if bug.status == 'TESTING' %}
+            {% if ticket.status == 'TESTING' %}
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Status: Testing</div>
             {% endif %}
-            {% if bug.status == 'COMPLETED' %}
+            {% if ticket.status == 'COMPLETED' %}
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Status: Completed</div>
             {% endif %}
         </div>
         <hr>
         
-        <p class="card-text">{{bug.description}}</p>
+        <p class="card-text">{{ticket.description}}</p>
     </div>
     <div class="card-footer text-muted">
-        <i class="fas fa-calendar-week"></i> {{bug.date}} - <i class="far fa-eye"></i> <span class="badge badge-primary badge-pill">{{bug.views}}</span> - <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{bug.upvotes}}</span> {% if user.is_authenticated %}<a href="{% url 'ticket_upvote' bug.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Button</span></a>{% endif%}
+        <i class="fas fa-calendar-week"></i> {{ticket.date}} - <i class="far fa-eye"></i> <span class="badge badge-primary badge-pill">{{ticket.views}}</span> - <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{ticket.upvotes}}</span> {% if user.is_authenticated %}<a href="{% url 'ticket_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Button</span></a>{% endif%}
     </div>
 </div>
 
 <h3 class="HeadingContainer">Comments</h3>
 {% if user.is_authenticated %}
-<p class="text-center"><a href="{% url 'new_comment' bug.id %}"><button type="button" class="btn btn-success">New Comment</button></a></p>
+<p class="text-center"><a href="{% url 'new_comment' ticket.id %}"><button type="button" class="btn btn-success">New Comment</button></a></p>
 {% endif %}
 {% for comment in comments %}
 <div class="card border-primary mb-3">

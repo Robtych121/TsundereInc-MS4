@@ -30,11 +30,11 @@ def all_features(request):
     tickets = Ticket.objects.exclude(status='COMPLETED').filter(type='FEATURE')
     return render(request, 'all_features.html', {'tickets': tickets})
 
-def view_bug(request, id):
+def view_ticket(request, id):
     """
     A view bug page with comments and also increments the views counter
     """
-    bug = Ticket.objects.get(id=id)
+    ticket = Ticket.objects.get(id=id)
 
     try:
         comments = Comment.objects.filter(ticketID=id)
@@ -42,12 +42,12 @@ def view_bug(request, id):
         comments = None
 
     # View Incrementer
-    bugViews = get_object_or_404(Ticket, pk=id)
-    bugViews.views = F('views') + 1
-    bugViews.save()
+    ticketViews = get_object_or_404(Ticket, pk=id)
+    ticketViews.views = F('views') + 1
+    ticketViews.save()
 
     
-    return render(request, 'view_bug.html', {'bug': bug,'comments': comments})
+    return render(request, 'view_ticket.html', {'ticket': ticket,'comments': comments})
 
 def create_or_edit_bug(request, pk=None):
     """
@@ -64,7 +64,7 @@ def create_or_edit_bug(request, pk=None):
             ticket.type = "BUG"
             ticket.author = username.capitalize()
             ticket.save()
-            return redirect(view_bug, ticket.pk)
+            return redirect(view_ticket, ticket.pk)
     else:
         form = TicketForm(instance=ticket)
     return render(request, 'ticketform.html', {'form': form})
@@ -78,4 +78,4 @@ def ticket_upvote(request, pk=None):
     ticket.upvotes = F('upvotes') + 1
     ticket.views = F('views') - 1
     ticket.save()
-    return redirect(view_bug, ticket.pk)
+    return redirect(view_ticket, ticket.pk)

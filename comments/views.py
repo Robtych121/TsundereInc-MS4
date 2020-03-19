@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Comment
 from .forms import CommentForm
-from tickets.views import view_bug
+from tickets.views import view_ticket
 
 # Create your views here.
 def create_or_edit_comment(request, id):
@@ -19,7 +19,7 @@ def create_or_edit_comment(request, id):
             comment.author = username.capitalize()
             comment.ticketID = id
             comment.save()
-            return redirect(view_bug, id)
+            return redirect(view_ticket, id)
     else:
         form = CommentForm
     return render(request, 'commentform.html', {'form': form})
