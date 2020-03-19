@@ -13,6 +13,16 @@ def all_bugs(request):
     username = request.user.username
     return render(request, 'all_bugs.html', {'tickets': tickets}, username)
 
+
+def all_completed_bugs(request):
+    """
+    Renders a page showing all the tickets with type bug and aren't completed
+    """
+    tickets = Ticket.objects.filter(type='BUG',status='COMPLETED')
+    username = request.user.username
+    return render(request, 'all_completed_bugs.html', {'tickets': tickets}, username)
+
+
 def all_features(request):
     """
     Renders a page showing all the tickets with type feature and aren't completed

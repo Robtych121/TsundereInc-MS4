@@ -1,8 +1,9 @@
 from django.conf.urls import url, include
-from .views import all_bugs, all_features, view_bug, create_or_edit_bug, ticket_upvote
+from .views import all_bugs, all_completed_bugs, all_features, view_bug, create_or_edit_bug, ticket_upvote
 
 urlpatterns = [
     url(r'^bugs/$', all_bugs, name='all_bugs'),
+    url(r'^bugs-completed/$', all_completed_bugs, name='all_completed_bugs'),
     url(r'^tickets/$', all_features, name='all_features'),
     url(r'^view-bug/(?P<id>\d+)', view_bug, name='view_bug'),
     url(r'^new/$', create_or_edit_bug, name='new_bug'),

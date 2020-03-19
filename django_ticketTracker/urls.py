@@ -18,10 +18,12 @@ from django.contrib import admin
 from home.views import index
 from accounts import urls as accounts_urls
 from tickets import urls as tickets_urls
+from comments import urls as comments_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name="index"),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^tickets/', include(tickets_urls)),
+    url(r'^comments/', include(comments_urls)),
 ]

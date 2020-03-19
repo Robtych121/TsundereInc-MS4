@@ -5,7 +5,15 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<p class="text-center"><a href="{% url 'edit_bug' bug.id %}"><button type="button" class="btn btn-info">Edit Bug</button></a></p>
+<p class="text-center">
+    {% if bug.status != 'COMPLETED' %}
+    <a href="{% url 'edit_bug' bug.id %}"><button type="button" class="btn btn-info">Edit Bug</button></a>
+    {% else %}
+    <div class="alert  alert-info">
+    Sorry, this bug cannot be edited anymore as it's been completed.
+    </div>
+    {% endif %}
+</p>
 {% endif %}
 <div class="card border-primary mb-3">
     <div class="card-header">{{bug.name}} - {{bug.author}}</div>
@@ -36,7 +44,7 @@
 
 <h3 class="HeadingContainer">Comments</h3>
 {% if user.is_authenticated %}
-<p class="text-center"><button type="button" class="btn btn-success">New Comment</button></p>
+<p class="text-center"><a href="{% url 'new_comment' bug.id %}"><button type="button" class="btn btn-success">New Comment</button></a></p>
 {% endif %}
 {% for comment in comments %}
 <div class="card border-primary mb-3">

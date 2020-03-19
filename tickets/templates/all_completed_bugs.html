@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block page_title %}All Pending Bugs{% endblock %}
-{% block page_heading%}All Pending Bugs{% endblock %}
+{% block page_title %}All Completed Bugs{% endblock %}
+{% block page_heading%}All Completed Bugs{% endblock %}
 
 {% block content %}
 <p class="text-center">
     {% if user.is_authenticated %}
     <a href="{% url 'new_bug' %}"><button type="button" class="btn btn-success">New Bug</button></a>
     {% endif %}
-    <a href="{% url 'all_completed_bugs' %}"><button type="button" class="btn btn-primary">Completed Bugs</button></a>
+    <a href="{% url 'all_bugs' %}"><button type="button" class="btn btn-primary">In Progress Bugs</button></a>
 </p>
 {% for ticket in tickets %}
 <div class="card border-primary mb-3">
