@@ -24,3 +24,23 @@ html, body {
 .btn-danger {
     color: white !important;
 }
+
+.footer {
+    margin-top: 15px;
+    padding: 15px;
+    padding-bottom: 25px;
+    background-color: #1a1a1a;
+    color: rgba(255,255,255,0.5);
+}
+
+.copyrightContainer {
+text-align: left;
+}
+
+.bottomLinksContainer {
+ text-align: center;
+}
+
+.socialMediaContainer {
+    text-align: right;
+}
