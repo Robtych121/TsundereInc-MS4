@@ -10,6 +10,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <p class="text-center">
+    <a onclick="window.history.go(-1);"><button type="button" class="btn btn-danger">Back</button></a>
     {% if ticket.status != 'COMPLETED' %}
         {% if ticket.type == 'BUG' %}<a href="{% url 'edit_bug' ticket.id %}"><button type="button" class="btn btn-info">Edit Bug</button></a>{%endif%}
         {% if ticket.type == 'FEATURE' %}<a href="{% url 'edit_feature' ticket.id %}"><button type="button" class="btn btn-info">Edit Feature</button></a>{%endif%}
