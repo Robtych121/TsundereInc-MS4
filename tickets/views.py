@@ -3,6 +3,8 @@ from django.db.models import F
 from .models import Ticket
 from comments.models import Comment
 from .forms import TicketForm
+from django.contrib.auth.models import User
+from accounts.models import Profile
 
 # Create your views here.
 def all_bugs(request):
@@ -54,8 +56,9 @@ def view_ticket(request, id):
     ticketViews.views = F('views') + 1
     ticketViews.save()
 
+    user = User.objects.get(email=request.user.email)
     
-    return render(request, 'view_ticket.html', {'ticket': ticket,'comments': comments})
+    return render(request, 'view_ticket.html', {'ticket': ticket,'comments': comments, 'user': user})
 
 def create_or_edit_bug(request, pk=None):
     """
@@ -104,8 +107,11 @@ def ticket_upvote(request, pk=None):
     Upvote view for tickets
     """
     ticket = get_object_or_404(Ticket, pk=pk) if pk else None
+    user = User.objects.get(email=request.user.email)
     ticket.upvotes = F('upvotes') + 1
     ticket.views = F('views') - 1
+    user.profile.bug_upvotes += 1
+    user.profile.save()
     ticket.save()
     return redirect(view_ticket, ticket.pk)
 
@@ -114,7 +120,12 @@ def feature_upvote(request, pk=None):
     Upvote view for tickets
     """
     ticket = get_object_or_404(Ticket, pk=pk) if pk else None
-    ticket.upvotes = F('upvotes') + 1
+    user = User.objects.get(email=request.user.email)
+    if(user.profile.points_available >= 1):
+        user.profile.points_available -= 1
+        user.profile.feature_upvotes += 1
+        user.profile.save()
+        ticket.upvotes = F('upvotes') + 1
     ticket.views = F('views') - 1
     ticket.save()
     return redirect(view_ticket, ticket.pk)

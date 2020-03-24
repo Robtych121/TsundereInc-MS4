@@ -52,10 +52,14 @@
             <a href="{% url 'ticket_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Bug</span></a>
             {% endif%}
             {% if ticket.type == 'FEATURE' %}
-                {% if ticket.status != 'COMPLETED' %}
-                <a href="{% url 'feature_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Feature</span></a>
+                {% if user.profile.points_available == 0 %}
+                    <span class="upvote-btn btn btn-warning btn-sm disabled" >Not Enough Points - Buy More</span>
                 {% else %}
-                <span class="upvote-btn btn btn-warning btn-sm disabled" >Upvote Feature</span>
+                    {% if ticket.status != 'COMPLETED' %}
+                    <a href="{% url 'feature_upvote' ticket.id %}"><span class="upvote-btn btn btn-warning btn-sm">Upvote Feature</span></a>
+                    {% else %}
+                    <span class="upvote-btn btn btn-warning btn-sm disabled" >Upvote Feature</span>
+                    {% endif%}
                 {% endif%}
             {% endif%}
         {% endif%}
