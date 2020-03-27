@@ -19,6 +19,9 @@ from home.views import index
 from accounts import urls as accounts_urls
 from tickets import urls as tickets_urls
 from comments import urls as comments_urls
+from checkout import urls as urls_checkout
+from products import urls as urls_products
+from cart import urls as urls_cart
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +29,7 @@ urlpatterns = [
     url(r'^accounts/', include(accounts_urls)),
     url(r'^tickets/', include(tickets_urls)),
     url(r'^comments/', include(comments_urls)),
+    url(r'^products/', include(urls_products)),
+    url(r'^cart/', include(urls_cart)),
+    url(r'^checkout/', include(urls_checkout)),
 ]
