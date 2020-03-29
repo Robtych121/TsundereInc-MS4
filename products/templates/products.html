@@ -26,8 +26,8 @@
             <td>£{{product.price}}</td>
             <form action="{% url 'add_to_cart' product.id %}" method="POST">
             {% csrf_token %}
-            <td><input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity"></td>
-            <td><button class="btn btn-success" type="submit">Add</button></td>
+            <td><input name="quantity" type="number" min="1" max="999" class="form-control-sm"></td>
+            <td><button class="btn btn-success btn-sm" type="submit">Add</button></td>
             </form>
           </tr>
         </tbody>
