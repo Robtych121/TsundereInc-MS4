@@ -56,7 +56,7 @@ def view_ticket(request, id):
     ticketViews.views = F('views') + 1
     ticketViews.save()
 
-    user = User.objects.get(email=request.user.email)
+    user = request.user
     
     return render(request, 'view_ticket.html', {'ticket': ticket,'comments': comments, 'user': user})
 
