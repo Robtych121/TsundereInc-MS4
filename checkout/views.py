@@ -6,6 +6,8 @@ from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
 from products.models import Product
+from django.contrib.auth.models import User
+from accounts.models import Profile
 import stripe
 
 
@@ -18,28 +20,36 @@ def checkout(request):
     if request.method=="POST":
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
+
+        user = User.objects.get(email=request.user.email)
         
         if order_form.is_valid() and payment_form.is_valid():
             order = order_form.save(commit=False)
             order.date = timezone.now()
             order.save()
+
             
             cart = request.session.get('cart', {})
             total = 0
+            points = 0
             for id, quantity in cart.items():
                 product = get_object_or_404(Product, pk=id)
                 total += quantity * product.price
+                points += quantity * product.points
                 order_line_item = OrderLineItem(
                     order = order, 
                     product = product, 
                     quantity = quantity
                     )
                 order_line_item.save()
+                user.profile.points_available += points
+                user.profile.cash_used += total
+                user.profile.save()
                 
             try:
                 customer = stripe.Charge.create(
                     amount = int(total * 100),
-                    currency = "EUR",
+                    currency = "GBP",
                     description = request.user.email,
                     card = payment_form.cleaned_data['stripe_id'],
                 )
@@ -61,4 +71,3 @@ def checkout(request):
         
     return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE})
                 
-            
