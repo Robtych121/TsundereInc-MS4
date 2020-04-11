@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
+
+{% block page_title %}New/Edit Bug{% endblock %}
+{% block page_heading%}New/Edit Bug{% endblock %}
+
 {% block content %}
-    <h1>New/Edit Bug</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}
