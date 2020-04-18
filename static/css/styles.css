@@ -44,3 +44,11 @@ text-align: left;
 .socialMediaContainer {
     text-align: right;
 }
+
+.forum-summary {
+    border-right: 1px solid black;
+}
+
+.forum-description {
+    padding-left: 20px;
+}

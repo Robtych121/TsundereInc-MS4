@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Forums{% endblock %}
+{% block page_heading%}Forums{% endblock %}
+
+{% block content %}
+    {% for forum in forums %}
+      <div class="card border-primary mb-3">
+        <div class="card-header">{{forum.name}}</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2 forum-summary">
+            <i class="fas fa-user"></i> {{ forum.author }} <br><hr>
+            <i class="fas fa-calendar-week"></i> {{forum.date}} <br><hr>
+            <i class="far fa-eye"></i><span class="badge badge-primary badge-pill">{{forum.views}}</span>
+            <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{forum.upvotes}}</span>
+          </div>
+          <div class="row-10 forum-description">
+            <p class="card-text">{{forum.description}}</p>
+          </div></div>
+        </div>
+        <div class="card-footer text-muted">
+            <span style="float: right;"><a href="#">View Post</a></span>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
