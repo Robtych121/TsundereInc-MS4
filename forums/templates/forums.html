@@ -4,6 +4,11 @@
 {% block page_heading%}Forums{% endblock %}
 
 {% block content %}
+    <p class="text-center">
+      {% if user.is_authenticated %}
+      <a href="{% url 'new_forum' %}"><button type="button" class="btn btn-success">New Post</button></a>
+      {% endif %}
+    </p>
     {% for forum in forums %}
       <div class="card border-primary mb-3">
         <div class="card-header">{{forum.name}}</div>
@@ -20,7 +25,7 @@
           </div></div>
         </div>
         <div class="card-footer text-muted">
-            <span style="float: right;"><a href="#">View Post</a></span>
+            <span style="float: right;"><a href="{% url 'view_forum' forum.id %}">View Post</a></span>
         </div>
     </div>
     {% endfor %}

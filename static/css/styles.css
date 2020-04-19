@@ -46,7 +46,7 @@ text-align: left;
 }
 
 .forum-summary {
-    border-right: 1px solid black;
+    border-right: 1px solid rgba(0,0,0,0.1);
 }
 
 .forum-description {
