@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F
 from django.contrib.auth.models import User
-from .models import Forum
-from .forms import ForumForm
+from .models import Forum, Comment
+from .forms import ForumForm, CommentForm
 
 # Create your views here.
 def forums(request):
@@ -24,9 +24,14 @@ def view_forum(request, id):
     forumViews.views = F('views') + 1
     forumViews.save()
 
+    try:
+        comments = Comment.objects.filter(forumID=id)
+    except Comment.DoesNotExist:
+        comments = None
+
     user = request.user
     
-    return render(request, 'view_forum.html', {'forum': forum, 'user': user})
+    return render(request, 'view_forum.html', {'forum': forum,'comments': comments, 'user': user})
 
 def create_or_edit_forum(request, pk=None):
     """
@@ -59,3 +64,24 @@ def forum_upvote(request, pk=None):
     user.profile.save()
     forum.save()
     return redirect(view_forum, forum.pk)
+
+
+def create_or_edit_forumcomment(request, id):
+    """
+    Create a  view that allows us to create
+    or edit a comment depending if the comment ID
+    is null or not
+    """
+    
+    username = request.user.username
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = username.capitalize()
+            comment.forumID = id
+            comment.save()
+            return redirect(view_forum, id)
+    else:
+        form = CommentForm
+    return render(request, 'commentform.html', {'form': form})

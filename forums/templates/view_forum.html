@@ -33,6 +33,16 @@
     </div>
     <h3 class="HeadingContainer">Comments</h3>
     {% if user.is_authenticated %}
-    <p class="text-center"><a href="#"><button type="button" class="btn btn-success">New Comment</button></a></p>
+    <p class="text-center"><a href="{% url 'new_forumcomment' forum.id %}"><button type="button" class="btn btn-success">New Comment</button></a></p>
     {% endif %}
+    {% for comment in comments %}
+<div class="card border-primary mb-3">
+    <div class="card-header">{{comment.author}} - {{comment.date}}</div>
+    <div class="card-body">        
+        <p class="card-text">{{comment.content}}</p>
+    </div>
+</div>
+{% empty %}
+<div class="alert alert-dismissible alert-info">There are no comments, Make one!</div>
+{% endfor%}
 {% endblock %}
