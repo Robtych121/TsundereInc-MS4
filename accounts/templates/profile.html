@@ -14,5 +14,5 @@
 <p>Forum Upvotes : {% if user.profile.forum_upvotes %}{{ user.profile.forum_upvotes }}{% else %}None{% endif%}</p>
 <hr>
 <p>Voting Points : {% if user.profile.points_available %}{{ user.profile.points_available }}{% else %}None{% endif%}</p>
-<p>Cash Used : {% if user.profile.cash_used %}{{ user.profile.cash_used }}{% else %}None{% endif%}</p>
+<p>Cash Used : {% if user.profile.cash_used %}£{{ user.profile.cash_used }}{% else %}None{% endif%}</p>
 {% endblock %}

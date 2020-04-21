@@ -15,16 +15,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='ticket',
             name='type',
-            field=models.CharField(choices=[('BUG', 'Bug'), ('FEATURE', 'Feature')], default='BUG', max_length=2),
+            field=models.CharField(choices=[('BUG', 'Bug'), ('FEATURE', 'Feature')], default='BUG', max_length=20),
         ),
         migrations.AlterField(
             model_name='ticket',
             name='priority',
-            field=models.CharField(choices=[('LOW', 'Low'), ('NORMAL', 'Normal'), ('HIGH', 'High')], default='LOW', max_length=2),
+            field=models.CharField(choices=[('LOW', 'Low'), ('NORMAL', 'Normal'), ('HIGH', 'High')], default='LOW', max_length=20),
         ),
         migrations.AlterField(
             model_name='ticket',
             name='status',
-            field=models.CharField(choices=[('NEW', 'New'), ('INPROGRESS', 'In Progress'), ('TESTING', 'Testing'), ('COMPLETED', 'Completed')], default='NEW', max_length=2),
+            field=models.CharField(choices=[('NEW', 'New'), ('INPROGRESS', 'In Progress'), ('TESTING', 'Testing'), ('COMPLETED', 'Completed')], default='NEW', max_length=20),
         ),
     ]
