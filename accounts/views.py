@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from accounts.models import Profile
 from accounts.forms import UserLoginForm, UserRegistrationForm
+from tickets.models import Ticket
 
 # Create your views here.
 @login_required
@@ -71,4 +72,7 @@ def registration(request):
 def user_profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
-    return render(request, "profile.html", {"profile": user})
+
+    bugs = Ticket.objects.filter(type='BUG',author=request.user.username)
+
+    return render(request, "profile.html", {"profile": user, "bugs": bugs})

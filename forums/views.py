@@ -45,7 +45,7 @@ def create_or_edit_forum(request, pk=None):
         form = ForumForm(request.POST, instance=forum)
         if form.is_valid():
             forum = form.save(commit=False)
-            forum.author = username.capitalize()
+            forum.author = username
             forum.save()
             return redirect(view_forum, forum.pk)
     else:

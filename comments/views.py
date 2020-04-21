@@ -16,7 +16,7 @@ def create_or_edit_comment(request, id):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.author = username.capitalize()
+            comment.author = username
             comment.ticketID = id
             comment.save()
             return redirect(view_ticket, id)

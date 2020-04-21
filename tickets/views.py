@@ -73,7 +73,7 @@ def create_or_edit_bug(request, pk=None):
         if form.is_valid():
             ticket = form.save(commit=False)
             ticket.type = "BUG"
-            ticket.author = username.capitalize()
+            ticket.author = username
             ticket.save()
             return redirect(view_ticket, ticket.pk)
     else:

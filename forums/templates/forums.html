@@ -15,7 +15,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-2 forum-summary">
-            <i class="fas fa-user"></i> {{ forum.author }} <br><hr>
+            <i class="fas fa-user"></i> {{ forum.author | capfirst }} <br><hr>
             <i class="fas fa-calendar-week"></i> {{forum.date}} <br><hr>
             <i class="far fa-eye"></i><span class="badge badge-primary badge-pill">{{forum.views}}</span>
             <i class="fas fa-arrow-circle-up"></i> <span class="badge badge-primary badge-pill">{{forum.upvotes}}</span>

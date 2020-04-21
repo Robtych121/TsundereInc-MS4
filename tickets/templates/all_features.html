@@ -13,7 +13,7 @@
 </p>
 {% for ticket in tickets %}
 <div class="card border-primary mb-3">
-    <div class="card-header">{{ticket.name}} - {{ticket.author}} <span style="float: right;"><a href="{% url 'view_ticket' ticket.id %}">View Feature</a></span></div>
+    <div class="card-header">{{ticket.name}} - {{ticket.author | capfirst}} <span style="float: right;"><a href="{% url 'view_ticket' ticket.id %}">View Feature</a></span></div>
     <div class="card-body">
         
         <div class="progress">

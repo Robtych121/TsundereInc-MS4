@@ -4,14 +4,27 @@
 {% block page_heading%}{{user}}'s Profile{% endblock %}
 
 {% block content %}
-<p>User Name: {{ user }}</p>
-<p>Email : {{ profile.email }}</p>
-<p>Member Since : {{ profile.date_joined }}</p>
+<div class="row">
+    <div class="col-6">
+        <p>User Name: {{ user }}</p>
+        <p>Email : {{ profile.email }}</p>
+        <p>Member Since : {{ profile.date_joined }}</p>
+    </div>
+    <div class="col-6">
+        <p>Bug Upvotes : {% if user.profile.bug_upvotes %}{{ user.profile.bug_upvotes }}{% else %}None{% endif%}<br>
+        Feature Upvotes : {% if user.profile.feature_upvotes %}{{ user.profile.feature_upvotes }}{% else %}None{% endif%}<br>
+        Forum Upvotes : {% if user.profile.forum_upvotes %}{{ user.profile.forum_upvotes }}{% else %}None{% endif%}</p>
+        <hr>
+        <p>Voting Points : {% if user.profile.points_available %}{{ user.profile.points_available }}{% else %}None{% endif%}<br>
+        Cash Used : {% if user.profile.cash_used %}£{{ user.profile.cash_used }}{% else %}None{% endif%}</p>
+    </div>
+</div>
 <hr>
-<p>Bug Upvotes : {% if user.profile.bug_upvotes %}{{ user.profile.bug_upvotes }}{% else %}None{% endif%}</p>
-<p>Feature Upvotes : {% if user.profile.feature_upvotes %}{{ user.profile.feature_upvotes }}{% else %}None{% endif%}</p>
-<p>Forum Upvotes : {% if user.profile.forum_upvotes %}{{ user.profile.forum_upvotes }}{% else %}None{% endif%}</p>
-<hr>
-<p>Voting Points : {% if user.profile.points_available %}{{ user.profile.points_available }}{% else %}None{% endif%}</p>
-<p>Cash Used : {% if user.profile.cash_used %}£{{ user.profile.cash_used }}{% else %}None{% endif%}</p>
+<div class="row">
+    <div class="col-12">
+        {% for bug in bugs %}
+        <p>Name: {{ bug.name }}</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

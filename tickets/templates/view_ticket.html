@@ -22,7 +22,7 @@
 </p>
 {% endif %}
 <div class="card border-primary mb-3">
-    <div class="card-header">{{ticket.name}} - {{ticket.author}}</div>
+    <div class="card-header">{{ticket.name}} - {{ticket.author | capfirst}}</div>
     <div class="card-body">
         
         <div class="progress">
@@ -72,7 +72,7 @@
 {% endif %}
 {% for comment in comments %}
 <div class="card border-primary mb-3">
-    <div class="card-header">{{comment.author}} - {{comment.date}}</div>
+    <div class="card-header">{{comment.author | capfirst}} - {{comment.date}}</div>
     <div class="card-body">        
         <p class="card-text">{{comment.content}}</p>
     </div>
