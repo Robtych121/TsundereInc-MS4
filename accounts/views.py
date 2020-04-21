@@ -51,6 +51,12 @@ def registration(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
+                user.profile.points_available = 0
+                user.profile.bug_upvotes = 0
+                user.profile.feature_upvotes = 0
+                user.profile.forum_upvotes = 0
+                user.profile.cash_used = 0
+                user.profile.save()
                 return redirect(reverse('index'))
             else:
                 messages.error(request, "Unable to register your account at this time")
