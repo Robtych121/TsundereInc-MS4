@@ -33,6 +33,18 @@ html, body {
     color: rgba(255,255,255,0.5);
 }
 
+.footer-link {
+    color: rgba(255,255,255,0.5);
+}
+
+.footer-link:hover {
+    color: rgba(255,255,255,1);
+}
+
+.footer .fab {
+    font-size: 25px;
+}
+
 .copyrightContainer {
 text-align: left;
 }
