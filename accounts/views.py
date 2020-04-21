@@ -51,6 +51,7 @@ def registration(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
+                user.profile.save()
                 user.profile.points_available = 0
                 user.profile.bug_upvotes = 0
                 user.profile.feature_upvotes = 0
