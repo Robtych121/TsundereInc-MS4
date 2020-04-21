@@ -22,9 +22,81 @@
 <hr>
 <div class="row">
     <div class="col-12">
+        <h2 class="HeadingContainer">Bugs Created</h2>
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Upvotes</th>
+                <th scope="col">Views</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for bug in bugs %}
-        <p>Name: {{ bug.name }}</p>
+        <tr>
+            <td>{{ bug.name }}</td>
+            <td>{{ bug.status }}</td>
+            <td>{{ bug.priority }}</td>
+            <td>{{ bug.upvotes }}</td>
+            <td>{{ bug.views }}</td>
+        </tr>
         {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-12">
+        <h2 class="HeadingContainer">Features Created</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Upvotes</th>
+                    <th scope="col">Views</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for feature in features %}
+            <tr>
+                <td>{{ feature.name }}</td>
+                <td>{{ feature.status }}</td>
+                <td>{{ feature.priority }}</td>
+                <td>{{ feature.upvotes }}</td>
+                <td>{{ feature.views }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-12">
+        <h2 class="HeadingContainer">Forum Posts Created</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Upvotes</th>
+                    <th scope="col">Views</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for forum in forums %}
+            <tr>
+                <td>{{ forum.name }}</td>
+                <td>{{ forum.upvotes }}</td>
+                <td>{{ forum.views }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
     </div>
 </div>
 {% endblock %}

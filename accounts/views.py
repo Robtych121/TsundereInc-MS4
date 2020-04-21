@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from accounts.models import Profile
 from accounts.forms import UserLoginForm, UserRegistrationForm
 from tickets.models import Ticket
+from forums.models import Forum
 
 # Create your views here.
 @login_required
@@ -74,5 +75,7 @@ def user_profile(request):
     user = User.objects.get(email=request.user.email)
 
     bugs = Ticket.objects.filter(type='BUG',author=request.user.username)
+    features = Ticket.objects.filter(type='FEATURE',author=request.user.username)
+    forums = Forum.objects.filter(author=request.user.username)
 
-    return render(request, "profile.html", {"profile": user, "bugs": bugs})
+    return render(request, "profile.html", {"profile": user, "bugs": bugs, "features": features, "forums":forums})
