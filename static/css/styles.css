@@ -64,3 +64,8 @@ text-align: left;
 .forum-description {
     padding-left: 20px;
 }
+
+.alert {
+    margin-top: 15px;
+    text-align: center;
+}
