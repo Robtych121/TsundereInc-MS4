@@ -60,7 +60,7 @@ The following technologies were used as part of this project:
 4. AWS S3 - This was used as asset storage since I am using file uploads and needed a place that wouldn't be cleaned daily.
 
 ## Testing
-To be able to achieve the user stories for the users/owner, I tested the following within the website:
+To be able to achieve the user stories for the users/owner, I tested the website during development and also used Travis CI to run some automated tests as well.
 
 #### User Testing
 - I was view to existing bugs/features/forums without logging in
