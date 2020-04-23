@@ -1,5 +1,6 @@
 from django.db import models
-from datetime import datetime 
+from datetime import datetime
+
 
 # Create your models here.
 class Ticket(models.Model):
@@ -28,7 +29,6 @@ class Ticket(models.Model):
     upvotes = models.IntegerField(blank=False, default=0)
     views = models.IntegerField(blank=False, default=0)
     points = models.IntegerField(blank=False, default=0)
-    
 
     def __str__(self):
         return '{0} - Type: {1} | Priority: {2} | Status: {3}'.format(self.name, self.type, self.priority, self.status)

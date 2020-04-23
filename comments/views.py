@@ -3,6 +3,7 @@ from .models import Comment
 from .forms import CommentForm
 from tickets.views import view_ticket
 
+
 # Create your views here.
 def create_or_edit_comment(request, id):
     """
@@ -10,7 +11,7 @@ def create_or_edit_comment(request, id):
     or edit a comment depending if the comment ID
     is null or not
     """
-    
+
     username = request.user.username
     if request.method == 'POST':
         form = CommentForm(request.POST)

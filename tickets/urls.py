@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from .views import all_bugs, all_completed_bugs, all_features, all_completed_features , view_ticket, create_or_edit_bug, create_or_edit_feature, ticket_upvote, feature_upvote
 
+
 urlpatterns = [
     url(r'^bugs/$', all_bugs, name='all_bugs'),
     url(r'^bugs-completed/$', all_completed_bugs, name='all_completed_bugs'),

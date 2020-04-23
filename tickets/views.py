@@ -6,6 +6,7 @@ from .forms import TicketForm
 from django.contrib.auth.models import User
 from accounts.models import Profile
 
+
 # Create your views here.
 def all_bugs(request):
     """
@@ -20,25 +21,30 @@ def all_completed_bugs(request):
     """
     Renders a page showing all the tickets with type bug and aren't completed
     """
-    tickets = Ticket.objects.filter(type='BUG',status='COMPLETED')
+    tickets = Ticket.objects.filter(type='BUG', status='COMPLETED')
     username = request.user.username
-    return render(request, 'all_completed_bugs.html', {'tickets': tickets}, username)
+    return render(request, 'all_completed_bugs.html',
+                           {'tickets': tickets}, username)
 
 
 def all_features(request):
     """
-    Renders a page showing all the tickets with type feature and aren't completed
+    Renders a page showing all the tickets with type
+    feature and aren't completed
     """
     tickets = Ticket.objects.exclude(status='COMPLETED').filter(type='FEATURE')
     return render(request, 'all_features.html', {'tickets': tickets})
+
 
 def all_completed_features(request):
     """
     Renders a page showing all the tickets with type bug and aren't completed
     """
-    tickets = Ticket.objects.filter(type='FEATURE',status='COMPLETED')
+    tickets = Ticket.objects.filter(type='FEATURE', status='COMPLETED')
     username = request.user.username
-    return render(request, 'all_completed_features.html', {'tickets': tickets}, username)
+    return render(request, 'all_completed_features.html',
+                           {'tickets': tickets}, username)
+
 
 def view_ticket(request, id):
     """
@@ -57,8 +63,11 @@ def view_ticket(request, id):
     ticketViews.save()
 
     user = request.user
-    
-    return render(request, 'view_ticket.html', {'ticket': ticket,'comments': comments, 'user': user})
+
+    return render(request, 'view_ticket.html', {'ticket': ticket,
+                                                'comments': comments,
+                                                'user': user})
+
 
 def create_or_edit_bug(request, pk=None):
     """
@@ -114,6 +123,7 @@ def ticket_upvote(request, pk=None):
     user.profile.save()
     ticket.save()
     return redirect(view_ticket, ticket.pk)
+
 
 def feature_upvote(request, pk=None):
     """

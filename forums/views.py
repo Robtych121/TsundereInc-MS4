@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Forum, Comment
 from .forms import ForumForm, CommentForm
 
+
 # Create your views here.
 def forums(request):
     """
@@ -12,6 +13,7 @@ def forums(request):
     forums = Forum.objects.all()
     username = request.user.username
     return render(request, 'forums.html', {'forums': forums}, username)
+
 
 def view_forum(request, id):
     """
@@ -30,8 +32,11 @@ def view_forum(request, id):
         comments = None
 
     user = request.user
-    
-    return render(request, 'view_forum.html', {'forum': forum,'comments': comments, 'user': user})
+
+    return render(request, 'view_forum.html', {'forum': forum,
+                                               'comments': comments,
+                                               'user': user})
+
 
 def create_or_edit_forum(request, pk=None):
     """
@@ -51,6 +56,7 @@ def create_or_edit_forum(request, pk=None):
     else:
         form = ForumForm(instance=forum)
     return render(request, 'forumform.html', {'form': form})
+
 
 def forum_upvote(request, pk=None):
     """
@@ -72,7 +78,7 @@ def create_or_edit_forumcomment(request, id):
     or edit a comment depending if the comment ID
     is null or not
     """
-    
+
     username = request.user.username
     if request.method == 'POST':
         form = CommentForm(request.POST)
