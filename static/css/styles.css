@@ -1,3 +1,4 @@
+/* General Site Wide Styles */
 html, body {
     background-image: url('../img/prism.png');
 }
@@ -17,13 +18,22 @@ html, body {
     padding-top: 15px;
 }
 
+.btn-danger {
+    color: white !important;
+}
+
+.alert {
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Ticket Styles */
+
 .upvote-btn {
     float: right;
 }
 
-.btn-danger {
-    color: white !important;
-}
+/* Footer Styles */
 
 .footer {
     margin-top: 15px;
@@ -57,6 +67,8 @@ text-align: left;
     text-align: right;
 }
 
+/* Forum Styles */
+
 .forum-summary {
     border-right: 1px solid rgba(0,0,0,0.1);
 }
@@ -65,7 +77,3 @@ text-align: left;
     padding-left: 20px;
 }
 
-.alert {
-    margin-top: 15px;
-    text-align: center;
-}
